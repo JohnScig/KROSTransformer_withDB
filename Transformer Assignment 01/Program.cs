@@ -9,16 +9,12 @@ namespace Transformer_Assignment_01
 {
     class Program
     {
-        static CarLot carLot = StartCarLot();
+        static CarLot carLot;
 
         static void Main(string[] args)
         {
-
-            //Filtrator filtrator = new Filtrator(carLot.carDatabase);
-            //LoadCars should ask for text file address, clean carDatabase then load cars from new textfile and work with only this text file
-
+            carLot = StartCarLot();
             MenuController();
-
         }
 
         /// <summary>
@@ -95,7 +91,7 @@ namespace Transformer_Assignment_01
 
             string databasePath = Console.ReadLine();
 
-            if (databasePath.Equals(""))
+            if (string.IsNullOrWhiteSpace(databasePath))
             {
                 return new CarLot();
             }

@@ -8,18 +8,6 @@ namespace Transformer_Assignment_01
 {
     class Filtrator
     {
-        //public List<Car> CarsToFilter { get; set; } = new List<Car>();
-        //public List<Car> FilteredCars;
-
-
-
-        //public Filtrator(List<Car> carLotDatabase)
-        //{
-        //    CarsToFilter = carLotDatabase;
-        //    FilteredCars = new List<Car>(CarsToFilter);
-        //}
-
-
         public static void FilterCars(List<Car> carLotDatabase)
         {
             List<Car> CarsToFilter = new List<Car>(carLotDatabase);

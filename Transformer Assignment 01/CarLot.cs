@@ -85,13 +85,17 @@ namespace Transformer_Assignment_01
                         decimal.Parse(parts[6]), parts[7], int.Parse(parts[8]), bool.Parse(parts[9])));
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e.Message);
-                Console.WriteLine("The file you tried to load is missing, corrupted or the data in it don't fit the required format. A new empty database file will be created. \n" +
+                Console.WriteLine("The file you tried to load is missing, corrupted or the data in it don't fit the required format. \n" +
+                    "A new empty database file will be created. \n" +
                     "Press any key to continue");
                 Console.ReadKey();
-                FilePath = CreateFilePath();
+                //FilePath = CreateFilePath();
+                //if (!FilePath.Contains(".txt"))
+                //{
+                FilePath += ".txt";
+                //}
             }
 
 
@@ -315,7 +319,7 @@ namespace Transformer_Assignment_01
             return sb.ToString();
         }
         #endregion
-        
+
     }
 }
 

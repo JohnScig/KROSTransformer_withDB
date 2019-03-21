@@ -116,8 +116,24 @@ namespace Transformer_Assignment_01
         {
             while (true)
             {
+                decimal outResult;
                 Console.WriteLine(query);
                 string stringPrice = Console.ReadLine();
+                if (stringPrice.Contains(',') && decimal.TryParse(stringPrice, out outResult))
+                {
+                    if (outResult%1==0)
+                    {
+                        stringPrice = stringPrice.Replace(',', '.');
+                    }
+                }
+                else if (stringPrice.Contains('.') && decimal.TryParse(stringPrice, out outResult))
+                {
+                    if (outResult % 1 == 0)
+                    {
+                        stringPrice = stringPrice.Replace('.', ',');
+                    }
+                }
+
                 decimal decimalPrice;
                 if (decimal.TryParse(stringPrice, out decimalPrice))
                 {
