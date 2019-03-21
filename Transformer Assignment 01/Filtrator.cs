@@ -12,12 +12,12 @@ namespace Transformer_Assignment_01
         public List<Car> FilteredCars;
 
         bool selecting = true;
-        bool byYear; int minYear = 0; int maxYear = 0;
-        bool byKms; int minKms = 0; int maxKms = 0;
-        bool byBrand; List<string> brands = new List<string>();
-        bool byFuel; List<Car.FuelEnum> fuels = new List<Car.FuelEnum>();
-        bool byPrice;
-        bool byCity;
+        bool byYear; 
+        bool byKms; 
+        bool byBrand; 
+        bool byFuel; 
+        bool byPrice; 
+        bool byCity; 
         bool byDoors;
         bool byCrashed;
 
@@ -38,7 +38,7 @@ namespace Transformer_Assignment_01
                 Console.WriteLine($"1 - filter by model year - {byYear}\n" +
                     $"2 - filter by km's driven - {byKms}\n" +
                     $"3 - filter by carmaker - {byBrand}\n" +
-                    //$"4 - filter by fuel - {byFuel}\n" +
+                    $"4 - filter by fuel - {byFuel}\n" +
                     $"5 - filter by price - {byPrice}\n" +
                     $"6 - filter by city - {byCity}\n" +
                     $"7 - filter by doors - {byDoors}\n" +
@@ -63,8 +63,8 @@ namespace Transformer_Assignment_01
 
             if (byYear)
             {
-                minYear = Checker.CheckYear("What is the lowest model year?");
-                maxYear = Checker.CheckYear("What is the highest model year?");
+                int minYear = Checker.CheckYear("What is the lowest model year?");
+                int maxYear = Checker.CheckYear("What is the highest model year?");
                 foreach (Car car in CarsToFilter)
                 {
                     if ((car.ModelYear <= minYear) || (car.ModelYear >= maxYear))
@@ -79,12 +79,12 @@ namespace Transformer_Assignment_01
 
             if (byKms)
             {
-                minKms = Checker.CheckKms("What is the lowest kms?");
-                maxKms = Checker.CheckKms("What is the highest kms?");
+                int minKms = Checker.CheckKms("What is the lowest kms?");
+                int maxKms = Checker.CheckKms("What is the highest kms?");
 
                 foreach (Car car in CarsToFilter)
                 {
-                    if ((car.KMs <= minKms) && (car.KMs >= maxKms))
+                    if ((car.KMs <= minKms) || (car.KMs >= maxKms))
                     {
                         if (FilteredCars.Contains(car))
                         {
@@ -97,6 +97,7 @@ namespace Transformer_Assignment_01
 
             if (byBrand)
             {
+                List<string> brands = new List<string>();
                 bool moreBrands = true;
                 do
                 {
@@ -111,7 +112,6 @@ namespace Transformer_Assignment_01
                     }
                 } while (moreBrands);
 
-                /*brands = userInput.Split(' ').ToList()*/;
                 foreach (Car car in CarsToFilter)
                 {
                     bool carToKeep = false;
@@ -134,28 +134,27 @@ namespace Transformer_Assignment_01
 
             if (byFuel)
             {
-                bool moreBrands = true;
+                List<Car.FuelEnum> fuels = new List<Car.FuelEnum>();
+                bool moreFuels = true;
                 do
                 {
-                    string userInput = Checker.CheckString($"Type in a fuel type. Select one of the following:{Car.getFuelTypes()}");
-                    brands.Add(userInput);
+                    Car.FuelEnum userInput = Checker.CheckFuel($"Type in a fuel type. Select one of the following:{Car.getFuelTypes()}");
+                    fuels.Add(userInput);
 
-                    Console.WriteLine("Would you like to add another brand to the filter? Type \"yes\" if so, any other input will mean this was the last brand");
+                    Console.WriteLine("Would you like to add another fuel to the filter? Type \"yes\" if so, any other input will mean this was the last brand");
                     string userAnswer = Console.ReadLine();
                     if (!userAnswer.Equals("yes") || !userAnswer.Equals("Yes") || !userAnswer.Equals("YES"))
                     {
-                        moreBrands = false;
+                        moreFuels = false;
                     }
-                } while (moreBrands);
+                } while (moreFuels);
 
-                /*brands = userInput.Split(' ').ToList()*/
-                ;
                 foreach (Car car in CarsToFilter)
                 {
                     bool carToKeep = false;
-                    foreach (string brand in brands)
+                    foreach (Car.FuelEnum fuel in fuels)
                     {
-                        if (car.Brand.Equals(brand))
+                        if (car.Fuel.Equals(fuel))
                         {
                             carToKeep = true;
                         }
@@ -168,6 +167,96 @@ namespace Transformer_Assignment_01
                         }
                     }
                 }
+            }
+
+            if (byPrice)
+            {
+          
+                decimal minPrice = Checker.CheckPrice("What is the lowest price?");
+                decimal maxPrice = Checker.CheckPrice("What is the highest price?");
+
+                foreach (Car car in CarsToFilter)
+                {
+                    if ((car.Price <= minPrice) || (car.Price >= maxPrice))
+                    {
+                        if (FilteredCars.Contains(car))
+                        {
+                            FilteredCars.Remove(car);
+                        }
+                    }
+                }
+
+            }
+
+            if (byCity)
+            {
+                List<string> cities = new List<string>();
+                bool moreCities = true;
+                do
+                {
+                    string userInput = Checker.CheckString("Type in a city.");
+                    cities.Add(userInput);
+
+                    Console.WriteLine("Would you like to add another city to the filter? Type \"yes\" if so, any other input will mean this was the last brand");
+                    string userAnswer = Console.ReadLine();
+                    if (!userAnswer.Equals("yes") || !userAnswer.Equals("Yes") || !userAnswer.Equals("YES"))
+                    {
+                        moreCities = false;
+                    }
+                } while (moreCities);
+
+                foreach (Car car in CarsToFilter)
+                {
+                    bool carToKeep = false;
+                    foreach (string city in cities)
+                    {
+                        if (car.City.Equals(city))
+                        {
+                            carToKeep = true;
+                        }
+                    }
+                    if (!carToKeep)
+                    {
+                        if (FilteredCars.Contains(car))
+                        {
+                            FilteredCars.Remove(car);
+                        }
+                    }
+                }
+            }
+
+            if (byDoors)
+            {
+                int doorValue = Checker.CheckKms("What is the required number of doors?");
+
+                foreach (Car car in CarsToFilter)
+                {
+                    if (!(car.Doors == doorValue))
+                    {
+                        if (FilteredCars.Contains(car))
+                        {
+                            FilteredCars.Remove(car);
+                        }
+                    }
+                }
+
+            }
+
+            if (byDoors)
+            {
+                bool crashedValue = Checker.CheckCrashed("Would you like to search for crashed cars?");
+
+                foreach (Car car in CarsToFilter)
+                {
+                    if (!(car.Crashed == crashedValue))
+                    {
+                        if (FilteredCars.Contains(car))
+                        {
+                            FilteredCars.Remove(car);
+                        }
+                    }
+                }
+
             }
 
 
