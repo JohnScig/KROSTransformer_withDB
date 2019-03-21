@@ -8,27 +8,34 @@ namespace Transformer_Assignment_01
 {
     class Filtrator
     {
-        public List<Car> CarsToFilter { get; set; } = new List<Car>();
-        public List<Car> FilteredCars;
+        //public List<Car> CarsToFilter { get; set; } = new List<Car>();
+        //public List<Car> FilteredCars;
 
-        bool selecting = true;
-        bool byYear; 
-        bool byKms; 
-        bool byBrand; 
-        bool byFuel; 
-        bool byPrice; 
-        bool byCity; 
-        bool byDoors;
-        bool byCrashed;
 
-        public Filtrator(List<Car> carLotDatabase)
+
+        //public Filtrator(List<Car> carLotDatabase)
+        //{
+        //    CarsToFilter = carLotDatabase;
+        //    FilteredCars = new List<Car>(CarsToFilter);
+        //}
+
+
+        public static void FilterCars(List<Car> carLotDatabase)
         {
-            CarsToFilter = carLotDatabase;
-            FilteredCars = new List<Car>(CarsToFilter);
-        }
+            List<Car> CarsToFilter = new List<Car>(carLotDatabase);
+            List<Car> FilteredCars = new List<Car>(CarsToFilter);
 
-        public void FilterCars()
-        {
+            bool selecting = true;
+            bool byYear = false;
+            bool byKms = false;
+            bool byBrand = false;
+            bool byFuel = false;
+            bool byPrice = false;
+            bool byCity = false;
+            bool byDoors = false;
+            bool byCrashed = false;
+
+
             Console.Clear();
             Console.WriteLine("Welcome to the filtration tool");
             while (selecting)
@@ -42,7 +49,7 @@ namespace Transformer_Assignment_01
                     $"5 - filter by price - {byPrice}\n" +
                     $"6 - filter by city - {byCity}\n" +
                     $"7 - filter by doors - {byDoors}\n" +
-                    $"8 - check if you're also looking for crashed vehicles - {byCrashed}\n");
+                    $"8 - check if you'd like to include crashed vehicles - {byCrashed}\n");
 
                 int selection = int.Parse(Console.ReadLine());
 
@@ -179,7 +186,7 @@ namespace Transformer_Assignment_01
 
             if (byPrice)
             {
-          
+
                 decimal minPrice = Checker.CheckPrice("What is the lowest price?");
                 decimal maxPrice = Checker.CheckPrice("What is the highest price?");
 
@@ -254,13 +261,11 @@ namespace Transformer_Assignment_01
 
             }
 
-            if (byCrashed)
+            if (!byCrashed)
             {
-                bool crashedValue = Checker.CheckCrashed("Would you like to search for crashed cars?");
-
                 foreach (Car car in CarsToFilter)
                 {
-                    if (!(car.Crashed == crashedValue))
+                    if ((car.Crashed == true))
                     {
                         if (FilteredCars.Contains(car))
                         {
@@ -268,7 +273,6 @@ namespace Transformer_Assignment_01
                         }
                     }
                 }
-
             }
 
             if (FilteredCars.Count > 0)
@@ -288,48 +292,6 @@ namespace Transformer_Assignment_01
             Console.Read();
             Console.Clear();
         }
-
-
-
     }
-
-
-
-    /*
-    public void FilterCarsByYear()
-    {
-        Console.Clear();
-        Console.WriteLine("What is the lowest model year?");
-        int minYear = int.Parse(Console.ReadLine());
-        Console.WriteLine("What is the highest model year?");
-        int maxYear = int.Parse(Console.ReadLine());
-
-        List<Car> filteredCars = new List<Car>();
-        foreach (Car car in CarDatabase)
-        {
-            if ((car.ModelYear <= maxYear) && (car.ModelYear >= minYear))
-            {
-                filteredCars.Add(car);
-            }
-        }
-
-        if (filteredCars.Count > 0)
-        {
-            Console.WriteLine("The following cars fit your search criteria");
-            foreach (Car car in filteredCars)
-            {
-                Console.WriteLine(car.ToString());
-            }
-        }
-        else
-        {
-            Console.WriteLine("No cars fit your search criteria");
-        }
-
-        Console.WriteLine("Press any key to get back to the menu");
-        Console.Read();
-        Console.Clear();
-    }
-    */
 }
 
