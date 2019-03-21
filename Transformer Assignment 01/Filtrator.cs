@@ -12,7 +12,7 @@ namespace Transformer_Assignment_01
         {
             List<Car> CarsToFilter = new List<Car>(carLotDatabase);
             List<Car> FilteredCars = new List<Car>(CarsToFilter);
-
+            
             bool selecting = true;
             bool byYear = false;
             bool byKms = false;
