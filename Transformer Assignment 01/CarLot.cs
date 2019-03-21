@@ -145,26 +145,23 @@ namespace Transformer_Assignment_01
         {
             Console.WriteLine("Please define the specific parameters of your car:");
 
-            int modelYear = Checker.CheckYear();
+            int modelYear = Checker.CheckYear("What is the year of production?");
 
-            int kms = Checker.CheckKms();
+            int kms = Checker.CheckKms("How many kilometers has the car driven?");
 
-            Console.WriteLine("What is the brand of this car?");
-            string brand = Console.ReadLine();
+            string brand = Checker.CheckString("What is the brand of this car? If there are 2 words, please join them: AlfaRomeo");
 
-            Console.WriteLine("What is the model of this car?");
-            string model = Console.ReadLine();
+            string model = Checker.CheckString("What is the model of this car?");
 
-            Car.FuelEnum fuel = Checker.CheckFuel();
+            Car.FuelEnum fuel = Checker.CheckFuel($"What fuel does the car take? Select one of the following:{Car.getFuelTypes()}");
 
-            decimal price = Checker.CheckPrice();
+            decimal price = Checker.CheckPrice("What is the car's price?");
 
-            Console.WriteLine("Where is the car being sold?");
-            string city = Console.ReadLine();
+            string city = Checker.CheckString("Where is the car being sold?");
 
-            int doors = Checker.CheckDoors();
+            int doors = Checker.CheckDoors("How many doors does the car have?");
 
-            bool crashed = Checker.CheckCrashed();
+            bool crashed = Checker.CheckCrashed("Has the car been crashed?");
 
             Car newCar = new Car(++Incrementor, modelYear, kms, brand, model, fuel, price, city, doors, crashed);
             carDatabase.Add(newCar);

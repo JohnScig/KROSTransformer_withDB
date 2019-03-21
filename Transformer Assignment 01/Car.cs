@@ -83,8 +83,8 @@ namespace Transformer_Assignment_01
             switch (propertyToChange)
             {
 
-                case (1): { ModelYear = Checker.CheckYear(); IndicateChange(); break; }
-                case (2): { KMs = Checker.CheckKms(); IndicateChange(); break; }
+                case (1): { ModelYear = Checker.CheckYear("What is the new Model Year value?"); IndicateChange(); break; }
+                case (2): { KMs = Checker.CheckKms("What is the new mileage value?"); IndicateChange(); break; }
                 case (3):
                     {
                         Console.WriteLine("What is the new brand?");
@@ -97,16 +97,16 @@ namespace Transformer_Assignment_01
                         newValue = Console.ReadLine();
                         Model = newValue; IndicateChange(); break;
                     }
-                case (5): { Fuel = Checker.CheckFuel(); IndicateChange(); break; }
-                case (6): { Price = Checker.CheckPrice(); IndicateChange(); break; }
+                case (5): { Fuel = Checker.CheckFuel("What is the new fuel value?"); IndicateChange(); break; }
+                case (6): { Price = Checker.CheckPrice("What is the new price?"); IndicateChange(); break; }
                 case (7):
                     {
                         Console.WriteLine("What is the new city?");
                         newValue = Console.ReadLine();
                         City = (newValue); IndicateChange(); break;
                     }
-                case (8): { Doors = Checker.CheckDoors(); IndicateChange(); break; }
-                case (9): { Crashed = Checker.CheckCrashed(); IndicateChange(); break; }
+                case (8): { Doors = Checker.CheckDoors("What is the new number of doors value?"); IndicateChange(); break; }
+                case (9): { Crashed = Checker.CheckCrashed("What is the new crashed value?"); IndicateChange(); break; }
                 default: { Console.WriteLine("Wrong input, nothing was changed in the database"); this.ToString(); break; }
             }
 

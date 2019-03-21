@@ -12,11 +12,11 @@ namespace Transformer_Assignment_01
         /// Checks for correct input when user inputs Model Year.
         /// </summary>
         /// <returns>Correct model year of the car</returns>
-        public static int CheckYear()
+        public static int CheckYear(string query)
         {
             while (true)
             {
-                Console.WriteLine("What is the year of production?");
+                Console.WriteLine(query);
                 string stringYear = Console.ReadLine();
                 int intYear;
                 if (int.TryParse(stringYear, out intYear))
@@ -45,11 +45,11 @@ namespace Transformer_Assignment_01
         /// Checks for correct input when user inputs kilometers.
         /// </summary>
         /// <returns>Correct number of kilometers of the car</returns>
-        public static int CheckKms()
+        public static int CheckKms(string query)
         {
             while (true)
             {
-                Console.WriteLine("How many kilometers has the car driven?");
+                Console.WriteLine(query);
                 string stringKms = Console.ReadLine();
                 int intKms;
                 if (int.TryParse(stringKms, out intKms))
@@ -78,11 +78,11 @@ namespace Transformer_Assignment_01
         /// Checks for correct input when user inputs type of fuel.
         /// </summary>
         /// <returns>Correct type of fuel of the car</returns>
-        public static Car.FuelEnum CheckFuel()
+        public static Car.FuelEnum CheckFuel(string query)
         {
             while (true)
             {
-                Console.WriteLine($"What fuel does the car take? Select one of the following:{Car.getFuelTypes()}");
+                Console.WriteLine(query);
                 string stringFuel = Console.ReadLine();
                 Car.FuelEnum enumFuel;
                 if (Enum.TryParse(stringFuel, out enumFuel))
@@ -112,11 +112,11 @@ namespace Transformer_Assignment_01
         /// Checks for correct input when user inputs price.
         /// </summary>
         /// <returns>Correct price of the car</returns>
-        public static decimal CheckPrice()
+        public static decimal CheckPrice(string query)
         {
             while (true)
             {
-                Console.WriteLine("What is the car's price?");
+                Console.WriteLine(query);
                 string stringPrice = Console.ReadLine();
                 decimal decimalPrice;
                 if (decimal.TryParse(stringPrice, out decimalPrice))
@@ -145,11 +145,11 @@ namespace Transformer_Assignment_01
         /// Checks for correct input when user inputs number of doors.
         /// </summary>
         /// <returns>Correct number of doors of the car</returns>
-        public static int CheckDoors()
+        public static int CheckDoors(string query)
         {
             while (true)
             {
-                Console.WriteLine("Doors?");
+                Console.WriteLine(query);
                 string stringDoors = Console.ReadLine();
                 int intDoors;
                 if (int.TryParse(stringDoors, out intDoors))
@@ -178,11 +178,11 @@ namespace Transformer_Assignment_01
         /// Checks for correct input when user inputs crashed flag.
         /// </summary>
         /// <returns>Correct crashed flag of the car</returns>
-        internal static bool CheckCrashed()
+        internal static bool CheckCrashed(string query)
         {
             while (true)
             {
-                Console.WriteLine("Crashed?");
+                Console.WriteLine(query);
                 string stringCrashed = Console.ReadLine();
                 bool boolCrashed;
                 if (bool.TryParse(stringCrashed, out boolCrashed))
@@ -194,6 +194,31 @@ namespace Transformer_Assignment_01
                     Console.WriteLine("Wrong input. Please put in a boolean value - \"True\" or \"False\". Press any key to continue");
                     Console.ReadKey();
                     continue;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks for correct input when user inputs a string - specifically it watches for white spaces.
+        /// </summary>
+        /// <returns>Correct string</returns>
+        public static string CheckString(string query)
+        {
+            while (true)
+            {
+                Console.WriteLine(query);
+                string stringInput = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(stringInput))
+                {
+
+                    Console.WriteLine("Wrong input. Your input was empty.");
+                    Console.ReadKey();
+                    continue;
+                }
+
+                else
+                {
+                    return stringInput;
                 }
             }
         }

@@ -15,7 +15,7 @@ namespace Transformer_Assignment_01
         bool byYear; int minYear = 0; int maxYear = 0;
         bool byKms; int minKms = 0; int maxKms = 0;
         bool byBrand; List<string> brands = new List<string>();
-        bool byFuel;
+        bool byFuel; List<Car.FuelEnum> fuels = new List<Car.FuelEnum>();
         bool byPrice;
         bool byCity;
         bool byDoors;
@@ -38,7 +38,7 @@ namespace Transformer_Assignment_01
                 Console.WriteLine($"1 - filter by model year - {byYear}\n" +
                     $"2 - filter by km's driven - {byKms}\n" +
                     $"3 - filter by carmaker - {byBrand}\n" +
-                    $"4 - filter by fuel - {byFuel}\n" +
+                    //$"4 - filter by fuel - {byFuel}\n" +
                     $"5 - filter by price - {byPrice}\n" +
                     $"6 - filter by city - {byCity}\n" +
                     $"7 - filter by doors - {byDoors}\n" +
@@ -63,10 +63,8 @@ namespace Transformer_Assignment_01
 
             if (byYear)
             {
-                Console.WriteLine("What is the lowest model year?");
-                minYear = int.Parse(Console.ReadLine());
-                Console.WriteLine("What is the highest model year?");
-                maxYear = int.Parse(Console.ReadLine());
+                minYear = Checker.CheckYear("What is the lowest model year?");
+                maxYear = Checker.CheckYear("What is the highest model year?");
                 foreach (Car car in CarsToFilter)
                 {
                     if ((car.ModelYear <= minYear) || (car.ModelYear >= maxYear))
@@ -81,34 +79,98 @@ namespace Transformer_Assignment_01
 
             if (byKms)
             {
-                Console.WriteLine("What is the lowest kms?");
-                minKms = int.Parse(Console.ReadLine());
-                Console.WriteLine("What is the highest kms?");
-                maxKms = int.Parse(Console.ReadLine());
+                minKms = Checker.CheckKms("What is the lowest kms?");
+                maxKms = Checker.CheckKms("What is the highest kms?");
 
                 foreach (Car car in CarsToFilter)
                 {
-                    if ((car.KMs >= minKms) && (car.KMs <= maxKms))
+                    if ((car.KMs <= minKms) && (car.KMs >= maxKms))
                     {
                         if (FilteredCars.Contains(car))
                         {
-                            FilteredCars.Add(car);
+                            FilteredCars.Remove(car);
                         }
                     }
                 }
 
             }
+
             if (byBrand)
             {
-                Console.WriteLine("Please put in all the brands. Separate them with a white space. Brands containing 2 words written as \"AlfaRomeo\"");
-                string userInput = Console.ReadLine();
-
-                brands = userInput.Split(' ').ToList();
-                foreach (var brand in brands)
+                bool moreBrands = true;
+                do
                 {
-                    Console.WriteLine(brand);
+                    string userInput = Checker.CheckString("Type in a brand. Brands containing 2 words written as \"AlfaRomeo\"");
+                    brands.Add(userInput);
+
+                    Console.WriteLine("Would you like to add another brand to the filter? Type \"yes\" if so, any other input will mean this was the last brand");
+                    string userAnswer = Console.ReadLine();
+                    if (!userAnswer.Equals("yes") || !userAnswer.Equals("Yes") || !userAnswer.Equals("YES"))
+                    {
+                        moreBrands = false;
+                    }
+                } while (moreBrands);
+
+                /*brands = userInput.Split(' ').ToList()*/;
+                foreach (Car car in CarsToFilter)
+                {
+                    bool carToKeep = false;
+                    foreach (string brand in brands)
+                    {
+                        if (car.Brand.Equals(brand))
+                        {
+                            carToKeep = true;
+                        }
+                    }
+                    if (!carToKeep)
+                    {
+                        if (FilteredCars.Contains(car))
+                        {
+                            FilteredCars.Remove(car);
+                        }
+                    }
                 }
             }
+
+            if (byFuel)
+            {
+                bool moreBrands = true;
+                do
+                {
+                    string userInput = Checker.CheckString($"Type in a fuel type. Select one of the following:{Car.getFuelTypes()}");
+                    brands.Add(userInput);
+
+                    Console.WriteLine("Would you like to add another brand to the filter? Type \"yes\" if so, any other input will mean this was the last brand");
+                    string userAnswer = Console.ReadLine();
+                    if (!userAnswer.Equals("yes") || !userAnswer.Equals("Yes") || !userAnswer.Equals("YES"))
+                    {
+                        moreBrands = false;
+                    }
+                } while (moreBrands);
+
+                /*brands = userInput.Split(' ').ToList()*/
+                ;
+                foreach (Car car in CarsToFilter)
+                {
+                    bool carToKeep = false;
+                    foreach (string brand in brands)
+                    {
+                        if (car.Brand.Equals(brand))
+                        {
+                            carToKeep = true;
+                        }
+                    }
+                    if (!carToKeep)
+                    {
+                        if (FilteredCars.Contains(car))
+                        {
+                            FilteredCars.Remove(car);
+                        }
+                    }
+                }
+            }
+
+
 
 
             if (FilteredCars.Count > 0)
@@ -127,8 +189,6 @@ namespace Transformer_Assignment_01
             Console.WriteLine("Press any key to get back to the menu");
             Console.Read();
             Console.Clear();
-
-
         }
 
 
