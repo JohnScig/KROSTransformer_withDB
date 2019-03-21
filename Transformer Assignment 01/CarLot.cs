@@ -91,11 +91,7 @@ namespace Transformer_Assignment_01
                     "A new empty database file will be created. \n" +
                     "Press any key to continue");
                 Console.ReadKey();
-                //FilePath = CreateFilePath();
-                //if (!FilePath.Contains(".txt"))
-                //{
                 FilePath += ".txt";
-                //}
             }
 
 
@@ -322,63 +318,3 @@ namespace Transformer_Assignment_01
 
     }
 }
-
-#region Unused Functions
-/// <summary>
-/// Method that runs through the ArrayList and checks which car's ID is equal to the user's input.
-/// </summary>
-/// <param name="id">ID of the car to find</param>
-/// <returns>the index of the car in the ArrayList</returns>
-//public int GetCarByID(int id)
-//{
-//    int carToReturn = -1;
-//    for (int i = 0; i < carDatabase.Count; i++)
-//    {
-//        if (carDatabase[i].ID == id)
-//        {
-//            carToReturn = i;
-//            return carToReturn;
-//        }
-//    }
-//    return carToReturn;
-//}
-
-/// <summary>
-/// Removes a car from ArrayList. User puts in the car's ID. 
-/// Car is found (using GetCarByID, returnin the index in the ArrayList where the car is) and removed from the ArrayList.
-/// </summary>
-//public void RemoveCar()
-//{
-//    int idToRemove;
-
-//    Console.Clear();
-//    ShowCars();
-//    Console.WriteLine("Which car would you like to remove? Please type in its ID");
-//    if (int.TryParse(Console.ReadLine(), out idToRemove)) { } else { Console.WriteLine("Wrong input. Please put in an integer ID"); Console.ReadKey(); }
-//    int carToRemove = getCarByID(idToRemove);
-
-//    if (carToRemove == -1)
-//    {
-//        Console.WriteLine("No such car in the database. Please try again");
-//        Console.ReadKey();
-//    }
-//    else
-//    {
-//        Console.Clear();
-//        Console.WriteLine(carDatabase[carToRemove].ToString());
-//        carDatabase.RemoveAt(carToRemove);
-//        Console.WriteLine("Selected car has been removed");
-//        Console.ReadKey();
-//        Console.Clear();
-//        SaveCars();
-//        Console.ReadKey();
-//        Console.Clear();
-//    }
-
-
-//    Incrementor = getHighestID();
-
-
-//}
-
-#endregion

@@ -82,7 +82,7 @@ namespace Transformer_Assignment_01
         {
             Console.WriteLine("Welcome to the Car Lot Database Program. \nPlease type in the name of the txt file which holds your data. Leave empty for default database.");
             Console.WriteLine("These are the .txt files currently in the default folder:");
-            DirectoryInfo dinfo = new DirectoryInfo(@"C: \Users\transformer10\source\repos\Transformer Assignment 01\Transformer Assignment 01\bin\Debug");
+            DirectoryInfo dinfo = new DirectoryInfo(Directory.GetCurrentDirectory());
             FileInfo[] Files = dinfo.GetFiles("*.txt");
             foreach (FileInfo file in Files)
             {

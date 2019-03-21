@@ -142,11 +142,3 @@ namespace Transformer_Assignment_01
     }
 }
 
-//carDatabase = AddCar(new Car(carDatabase.Count, 2018, 150, "Skoda", "Fabia", "Petrol", 10000, "Nove Mesto", 5, false), carDatabase, "car.txt");
-//carDatabase = AddCar(new Car(carDatabase.Count, 2017, 785, "Skoda", "Octavia", "Petrol", 10000, "Zilina", 5, false), carDatabase, "car.txt");
-//carDatabase = AddCar(new Car(carDatabase.Count, 2016, 999, "Skoda", "Felicia", "Diesel", 10000, "Partizanske", 3, false), carDatabase, "car.txt");
-//carDatabase = AddCar(new Car(carDatabase.Count, 2014, 123, "Skoda", "Superb", "Petrol", 10000, "Bratislava", 5, true), carDatabase, "car.txt");
-//carDatabase = AddCar(new Car(carDatabase.Count, 2015, 151, "Skoda", "Citygo", "Electric", 10000, "Bratislava", 3, false), carDatabase, "car.txt");
-
-
-
