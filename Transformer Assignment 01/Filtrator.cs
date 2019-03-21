@@ -106,7 +106,11 @@ namespace Transformer_Assignment_01
 
                     Console.WriteLine("Would you like to add another brand to the filter? Type \"yes\" if so, any other input will mean this was the last brand");
                     string userAnswer = Console.ReadLine();
-                    if (!userAnswer.Equals("yes") || !userAnswer.Equals("Yes") || !userAnswer.Equals("YES"))
+                    if (userAnswer.Equals("yes") || userAnswer.Equals("Yes") || userAnswer.Equals("YES"))
+                    {
+                        moreBrands = true;
+                    }
+                    else
                     {
                         moreBrands = false;
                     }
@@ -143,7 +147,11 @@ namespace Transformer_Assignment_01
 
                     Console.WriteLine("Would you like to add another fuel to the filter? Type \"yes\" if so, any other input will mean this was the last brand");
                     string userAnswer = Console.ReadLine();
-                    if (!userAnswer.Equals("yes") || !userAnswer.Equals("Yes") || !userAnswer.Equals("YES"))
+                    if (userAnswer.Equals("yes") || userAnswer.Equals("Yes") || userAnswer.Equals("YES"))
+                    {
+                        moreFuels = true;
+                    }
+                    else
                     {
                         moreFuels = false;
                     }
@@ -199,7 +207,11 @@ namespace Transformer_Assignment_01
 
                     Console.WriteLine("Would you like to add another city to the filter? Type \"yes\" if so, any other input will mean this was the last brand");
                     string userAnswer = Console.ReadLine();
-                    if (!userAnswer.Equals("yes") || !userAnswer.Equals("Yes") || !userAnswer.Equals("YES"))
+                    if (userAnswer.Equals("yes") || userAnswer.Equals("Yes") || userAnswer.Equals("YES"))
+                    {
+                        moreCities = true;
+                    }
+                    else
                     {
                         moreCities = false;
                     }
@@ -242,7 +254,7 @@ namespace Transformer_Assignment_01
 
             }
 
-            if (byDoors)
+            if (byCrashed)
             {
                 bool crashedValue = Checker.CheckCrashed("Would you like to search for crashed cars?");
 
@@ -258,9 +270,6 @@ namespace Transformer_Assignment_01
                 }
 
             }
-
-
-
 
             if (FilteredCars.Count > 0)
             {
