@@ -85,16 +85,25 @@ namespace Transformer_Assignment_01
                         decimal.Parse(parts[6]), parts[7], int.Parse(parts[8]), bool.Parse(parts[9])));
                 }
             }
-            catch (Exception)
+            catch (FileNotFoundException)
             {
-                Console.WriteLine("The file you tried to load is missing, corrupted or the data in it don't fit the required format. \n" +
-                    "A new empty database file will be created. \n" +
+                Console.WriteLine("The file you tried to load is missing.\n" +
+                    "A new empty database file will be created.\n" +
                     "Press any key to continue");
                 Console.ReadKey();
                 if (!FilePath.Contains(".txt"))
                 {
                     FilePath += ".txt";
                 }
+            }
+            catch (Exception)
+            {
+                FilePath = CreateFilePath();
+                Console.WriteLine("The file you tried to load is corrupted or the data in it doesn't fit the required format.\n" +
+                    $"A new empty database file was created named {FilePath}\n" +
+                    "Press any key to continue");
+                Console.ReadKey();
+                FilePath = CreateFilePath();
             }
 
 

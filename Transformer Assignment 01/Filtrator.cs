@@ -277,7 +277,7 @@ namespace Transformer_Assignment_01
             }
 
             Console.WriteLine("Press any key to get back to the menu");
-            Console.Read();
+            Console.ReadLine();
             Console.Clear();
         }
     }

@@ -57,7 +57,6 @@ namespace Transformer_Assignment_01
                     case (4): { carLot.AddCar(); break; }
                     case (5): { carLot.RemoveCar(); break; }
                     case (6): { carLot.ChangeCar(); break; }
-                    //case (7): { Filtrator filtrator = new Filtrator(carLot.carDatabase); filtrator.FilterCars(); break; }
                     case (7): { Filtrator.FilterCars(carLot.carDatabase); break; }
                     default: { quit = false; break; }
                 }
