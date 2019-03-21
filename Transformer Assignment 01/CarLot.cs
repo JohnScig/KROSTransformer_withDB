@@ -91,7 +91,10 @@ namespace Transformer_Assignment_01
                     "A new empty database file will be created. \n" +
                     "Press any key to continue");
                 Console.ReadKey();
-                FilePath += ".txt";
+                if (!FilePath.Contains(".txt"))
+                {
+                    FilePath += ".txt";
+                }
             }
 
 
