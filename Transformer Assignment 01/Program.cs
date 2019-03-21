@@ -41,7 +41,7 @@ namespace Transformer_Assignment_01
                 Console.WriteLine("4 - Add a new car to the database");
                 Console.WriteLine("5 - Remove a car from the database");
                 Console.WriteLine("6 - Change a property of a car from the database");
-                //Console.WriteLine("7 - Filter tool");
+                Console.WriteLine("7 - Filter tool");
                 Console.WriteLine("\nPress any other number to quit");
 
                 int controller;
@@ -61,7 +61,7 @@ namespace Transformer_Assignment_01
                     case (4): { carLot.AddCar(); break; }
                     case (5): { carLot.RemoveCar(); break; }
                     case (6): { carLot.ChangeCar(); break; }
-                    //case (7): { Filtrator filtrator = new Filtrator(carLot.carDatabase); filtrator.filterCars(); break; }
+                    case (7): { Filtrator filtrator = new Filtrator(carLot.carDatabase); filtrator.FilterCars(); break; }
                     default: { quit = false; break; }
                 }
 

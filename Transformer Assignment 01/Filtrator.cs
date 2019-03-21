@@ -8,11 +8,12 @@ namespace Transformer_Assignment_01
 {
     class Filtrator
     {
-        public List<Car> CarDatabase { get; set; }
-        public List<Car> FilteredCars { get; set; } = new List<Car>();
+        public List<Car> CarsToFilter { get; set; } = new List<Car>();
+        public List<Car> FilteredCars;
+
         bool selecting = true;
-        bool byYear; int minYear = 0; int maxYear = 9999;
-        bool byKms; int minKms = 0; int maxKms = int.MaxValue;
+        bool byYear; int minYear = 0; int maxYear = 0;
+        bool byKms; int minKms = 0; int maxKms = 0;
         bool byBrand; List<string> brands = new List<string>();
         bool byFuel;
         bool byPrice;
@@ -22,10 +23,11 @@ namespace Transformer_Assignment_01
 
         public Filtrator(List<Car> carLotDatabase)
         {
-            CarDatabase = carLotDatabase;
+            CarsToFilter = carLotDatabase;
+            FilteredCars = new List<Car>(CarsToFilter);
         }
 
-        public void filterCars()
+        public void FilterCars()
         {
             Console.Clear();
             Console.WriteLine("Welcome to the filtration tool");
@@ -65,44 +67,49 @@ namespace Transformer_Assignment_01
                 minYear = int.Parse(Console.ReadLine());
                 Console.WriteLine("What is the highest model year?");
                 maxYear = int.Parse(Console.ReadLine());
+                foreach (Car car in CarsToFilter)
+                {
+                    if ((car.ModelYear <= minYear) || (car.ModelYear >= maxYear))
+                    {
+                        if (FilteredCars.Contains(car))
+                        {
+                            FilteredCars.Remove(car);
+                        }
+                    }
+                }
             }
+
             if (byKms)
             {
                 Console.WriteLine("What is the lowest kms?");
                 minKms = int.Parse(Console.ReadLine());
                 Console.WriteLine("What is the highest kms?");
                 maxKms = int.Parse(Console.ReadLine());
+
+                foreach (Car car in CarsToFilter)
+                {
+                    if ((car.KMs >= minKms) && (car.KMs <= maxKms))
+                    {
+                        if (FilteredCars.Contains(car))
+                        {
+                            FilteredCars.Add(car);
+                        }
+                    }
+                }
+
             }
             if (byBrand)
             {
                 Console.WriteLine("Please put in all the brands. Separate them with a white space. Brands containing 2 words written as \"AlfaRomeo\"");
                 string userInput = Console.ReadLine();
 
-                char[] separator = new char[] { ' ' };
-                brands = userInput.Split(separator).ToList();
+                brands = userInput.Split(' ').ToList();
                 foreach (var brand in brands)
                 {
                     Console.WriteLine(brand);
                 }
             }
 
-            foreach (Car car in CarDatabase)
-            {
-                if ((car.ModelYear <= maxYear) && (car.ModelYear >= minYear) && (car.KMs <= maxKms) && (car.KMs >= minKms))
-                {
-                    if (brands.Count != 0)
-                    {
-                        if (brands.Contains(car.Brand))
-                        { FilteredCars.Add(car); }
-                        else
-                        { }
-                    }
-                    else
-                    {
-                        FilteredCars.Add(car);
-                    }
-                }
-            }
 
             if (FilteredCars.Count > 0)
             {
