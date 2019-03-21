@@ -33,7 +33,7 @@ namespace Transformer_Assignment_01
         /// <summary>
         /// Default constructor - loads the default .txt file as the database.
         /// </summary>
-        public CarLot() { LoadCars();}
+        public CarLot() { LoadCars(); }
 
         /// <summary>
         /// 
@@ -108,7 +108,7 @@ namespace Transformer_Assignment_01
                 Console.WriteLine("Your text file is empty.");
             }
 
-            Console.WriteLine("Press any key to return to the main menu.")  ;
+            Console.WriteLine("Press any key to return to the main menu.");
             Console.ReadKey();
             Console.Clear();
             carDatabase = carList;
@@ -197,7 +197,7 @@ namespace Transformer_Assignment_01
             int idToRemove;
             bool carRemoved = false;
 
-            if (carDatabase.Count==0)
+            if (carDatabase.Count == 0)
             {
                 Console.WriteLine("The database is empty. Press any key to continue");
                 Console.ReadKey();
@@ -310,7 +310,7 @@ namespace Transformer_Assignment_01
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("defaultCarLot_");
-            sb.Append("day_" + DateTime.Now.DayOfYear);
+            sb.Append("day_" +  DateTime.Now.DayOfYear);
             sb.Append("_time_" + DateTime.Now.Hour);
             sb.Append(DateTime.Now.Minute);
             sb.Append(DateTime.Now.Second);
@@ -318,7 +318,7 @@ namespace Transformer_Assignment_01
             return sb.ToString();
         }
         #endregion
-
+        
     }
 }
 
