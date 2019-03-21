@@ -310,7 +310,7 @@ namespace Transformer_Assignment_01
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("defaultCarLot_");
-            sb.Append("day_" +  DateTime.Now.DayOfYear);
+            sb.Append("day_" + DateTime.Now.DayOfYear);
             sb.Append("_time_" + DateTime.Now.Hour);
             sb.Append(DateTime.Now.Minute);
             sb.Append(DateTime.Now.Second);
