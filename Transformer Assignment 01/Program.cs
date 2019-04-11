@@ -38,6 +38,8 @@ namespace Transformer_Assignment_01
                 Console.WriteLine("5 - Remove a car from the database");
                 Console.WriteLine("6 - Change a property of a car from the database");
                 Console.WriteLine("7 - Filter tool");
+                Console.WriteLine("8 - Load cars from SQL Database");
+                Console.WriteLine("9 - Load one car based on its ID");
                 Console.WriteLine("\nPress any other number to quit");
 
                 int controller;
@@ -58,6 +60,9 @@ namespace Transformer_Assignment_01
                     case (5): { carLot.RemoveCar(); break; }
                     case (6): { carLot.ChangeCar(); break; }
                     case (7): { Filtrator.FilterCars(carLot.carDatabase); break; }
+                    case (8): { carLot.LoadCarsSQL(); break; }
+                    case (9): { carLot.GetCarByIDSQL(); break; }
+
                     default: { quit = false; break; }
                 }
 

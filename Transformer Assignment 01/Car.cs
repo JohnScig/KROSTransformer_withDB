@@ -50,6 +50,7 @@ namespace Transformer_Assignment_01
             Crashed = crashed;
         }
 
+        public Car() { }
         #endregion
 
         #region Methods

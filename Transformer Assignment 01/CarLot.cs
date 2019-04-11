@@ -26,6 +26,8 @@ namespace Transformer_Assignment_01
         /// </summary>
         public int Incrementor { get; set; } = 0;
 
+        private CarRepository carRepository = new CarRepository();
+
         #endregion
 
         #region Constructors
@@ -128,6 +130,61 @@ namespace Transformer_Assignment_01
         }
 
         /// <summary>
+        /// Loads cars into an ArrayList from an SQL Database
+        /// </summary>
+        public void LoadCarsSQL()
+        {
+            carDatabase = carRepository.GetAll();
+
+            if (carDatabase.Count != 0)
+            {
+                Console.WriteLine("The following cars have been successfully loaded from the database:");
+                foreach (var car in carDatabase)
+                {
+                    Console.WriteLine(car.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine("Your text file is empty.");
+            }
+
+            Console.WriteLine("Press any key to return to the main menu.");
+            Console.ReadKey();
+            Console.Clear();
+            Incrementor = getHighestID();
+        }
+
+        /// <summary>
+        /// Prints out information about a single car from the SQL Database
+        /// </summary>
+        /// <returns></returns>
+        public bool GetCarByIDSQL()
+        {
+            int idToSelect;
+
+            if (carDatabase.Count == 0)
+            {
+                Console.WriteLine("The database is empty. Press any key to continue");
+                Console.ReadKey();
+                return false;
+            }
+
+            Console.Clear();
+            ShowCars();
+            Console.WriteLine("Which car would you like to change? Please type in its ID");
+            if (int.TryParse(Console.ReadLine(), out idToSelect)) { } else { Console.WriteLine("Wrong input. Please put in an integer ID"); Console.ReadKey(); }
+
+            Console.Clear();
+            Console.WriteLine(carRepository.GetByID(idToSelect).ToString());
+
+            Console.WriteLine("Press Any Key To Continue");
+            Console.ReadKey();
+            return true;
+        }
+
+
+        /// <summary>
         /// Prints Car.ToString() for each car in the ArrayList. Prints a message in case the ArrayList is empty.
         /// </summary>
         public void ShowCars()
@@ -176,6 +233,8 @@ namespace Transformer_Assignment_01
             bool crashed = Checker.CheckCrashed("Has the car been crashed?");
 
             Car newCar = new Car(++Incrementor, modelYear, kms, brand, model, fuel, price, city, doors, crashed);
+
+            AddCarSQL(newCar);
             carDatabase.Add(newCar);
             File.AppendAllText(FilePath, newCar.ToString() + "\n");
             Console.WriteLine("The following car has been successfully added to the database:");
@@ -196,6 +255,23 @@ namespace Transformer_Assignment_01
             File.AppendAllText(FilePath, (car.ToString() + "\n"));
             Console.WriteLine("The following car has been successfully added to the database:");
             Console.Write(car.ToString());
+        }
+
+        /// <summary>
+        /// Adds the car to the SQL Database
+        /// </summary>
+        /// <param name="car"></param>
+        public void AddCarSQL(Car car)
+        {
+            carDatabase.Add(car);
+            if (carRepository.AddNewCar(car) != 0)
+            {
+                Console.WriteLine("Car successfully added to SQL Database");
+            }
+            else
+            {
+                Console.WriteLine("Car not added to the SQL Database");
+            }
         }
 
         /// <summary>
@@ -225,6 +301,7 @@ namespace Transformer_Assignment_01
                     Console.Clear();
                     Console.WriteLine(car.ToString());
                     carDatabase.Remove(car);
+                    carRepository.DeleteCar(car);
                     carRemoved = true;
                     break;
                 }
@@ -264,9 +341,6 @@ namespace Transformer_Assignment_01
             ShowCars();
             Console.WriteLine("Which car would you like to change? Please type in its ID");
             if (int.TryParse(Console.ReadLine(), out idToChange)) { } else { Console.WriteLine("Wrong input. Please put in an integer ID"); Console.ReadKey(); }
-            //int carToChange = getCarByID(idToChange);
-            //idToChange = int.Parse(Console.ReadLine());
-            //int carToChange = getCarByID(idToChange);
 
             foreach (Car car in carDatabase)
             {
@@ -275,6 +349,10 @@ namespace Transformer_Assignment_01
                     Console.Clear();
                     Console.WriteLine(car.ToString());
                     car.ChangeProperty();
+                    if (carRepository.UpdateCar(car))
+                    {
+                        Console.WriteLine("Car updated in database");
+                    }
                     carChanged = true;
                     break;
                 }
